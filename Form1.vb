@@ -9,6 +9,39 @@ Public Class Form1
         Next
     End Sub
 
+    Private Function CountBlue()
+        Dim count As Integer
+        count = 0
+        For Each button As Button In Me.Controls.OfType(Of Button)()
+            If button.BackColor = Color.Blue Then
+                count += 1
+            End If
+        Next
+        Return count
+    End Function
+
+    Private Function CountYellow()
+        Dim count As Integer
+        count = 0
+        For Each button As Button In Me.Controls.OfType(Of Button)()
+            If button.BackColor = Color.Yellow Then
+                count += 1
+            End If
+        Next
+        Return count
+    End Function
+
+    Private Function AllButtonClose()
+        Dim check As Boolean = True
+        For Each button As Button In Me.Controls.OfType(Of Button)()
+            If button.Enabled Then
+                check = False
+                Exit For
+            End If
+        Next
+        Return check
+    End Function
+
     Dim checkBlock As Integer = 0
     Dim userStatus As Integer = 0
     Dim lineCount As Integer = 0
@@ -24,12 +57,11 @@ Public Class Form1
     Dim blockLine8 As Integer = 0
     Dim blockLine9 As Integer = 0
     '--------------------------------------------------------------
-    Private Sub First_Block(sender As Object, e As EventArgs) _
-    Handles Button1.Click, Button2.Click, Button3.Click, Button10.Click, Button11.Click, Button12.Click, Button19.Click, Button20.Click, Button21.Click
+    Private Sub First_Block(sender As Object, e As EventArgs) Handles Button1.Click, Button2.Click, Button3.Click, Button10.Click, Button11.Click, Button12.Click, Button19.Click, Button20.Click, Button21.Click
         SetAllButtonsToWhite()
         '------------------------------------------------
         Dim ClickedButton = DirectCast(sender, Button)
-        If userStatus <> 1 AndAlso userStatus <> 0 Then
+        If userStatus <> 1 AndAlso userStatus <> 0 AndAlso userStatus <> 10 Then
             If checkBlock <> 1 Then
                 ClickedButton.BackColor = Color.Red
                 Exit Sub
@@ -179,21 +211,38 @@ Public Class Form1
             Case 21
                 userStatus = 9
         End Select
+        If (userStatus = 1 AndAlso blockLine1 = 1) OrElse
+        (userStatus = 2 AndAlso blockLine2 = 1) OrElse
+        (userStatus = 3 AndAlso blockLine3 = 1) OrElse
+        (userStatus = 4 AndAlso blockLine4 = 1) OrElse
+        (userStatus = 5 AndAlso blockLine5 = 1) OrElse
+        (userStatus = 6 AndAlso blockLine6 = 1) OrElse
+        (userStatus = 7 AndAlso blockLine7 = 1) OrElse
+        (userStatus = 8 AndAlso blockLine8 = 1) OrElse
+        (userStatus = 9 AndAlso blockLine9 = 1) Then
+            userStatus = 10
+        End If
         '-----------------------------------------------------
-        If Button1.Enabled = False AndAlso Button2.Enabled = False AndAlso Button3.Enabled = False AndAlso
-        Button10.Enabled = False AndAlso Button11.Enabled = False AndAlso Button12.Enabled = False AndAlso
-        Button19.Enabled = False AndAlso Button20.Enabled = False AndAlso Button21.Enabled = False Then
+        If blockLine1 = 1 Then
+            Button1.Enabled = False
+            Button2.Enabled = False
+            Button3.Enabled = False
+            Button10.Enabled = False
+            Button11.Enabled = False
+            Button12.Enabled = False
+            Button19.Enabled = False
+            Button20.Enabled = False
+            Button21.Enabled = False
             checkBlock = 1
         Else
             checkBlock = 0
         End If
     End Sub
 
-    Private Sub Second_Block(sender As Object, e As EventArgs) _
-    Handles Button4.Click, Button5.Click, Button6.Click, Button13.Click, Button14.Click, Button15.Click, Button22.Click, Button23.Click, Button24.Click
+    Private Sub Second_Block(sender As Object, e As EventArgs) Handles Button4.Click, Button5.Click, Button6.Click, Button13.Click, Button14.Click, Button15.Click, Button22.Click, Button23.Click, Button24.Click
         SetAllButtonsToWhite()
         Dim ClickedButton = DirectCast(sender, Button)
-        If userStatus <> 2 AndAlso userStatus <> 0 Then
+        If userStatus <> 2 AndAlso userStatus <> 0 AndAlso userStatus <> 10 Then
             If checkBlock <> 1 Then
                 ClickedButton.BackColor = Color.Red
                 Exit Sub
@@ -342,21 +391,38 @@ Public Class Form1
             Case 24
                 userStatus = 9
         End Select
+        If (userStatus = 1 AndAlso blockLine1 = 1) OrElse
+        (userStatus = 2 AndAlso blockLine2 = 1) OrElse
+        (userStatus = 3 AndAlso blockLine3 = 1) OrElse
+        (userStatus = 4 AndAlso blockLine4 = 1) OrElse
+        (userStatus = 5 AndAlso blockLine5 = 1) OrElse
+        (userStatus = 6 AndAlso blockLine6 = 1) OrElse
+        (userStatus = 7 AndAlso blockLine7 = 1) OrElse
+        (userStatus = 8 AndAlso blockLine8 = 1) OrElse
+        (userStatus = 9 AndAlso blockLine9 = 1) Then
+            userStatus = 10
+        End If
         '------------------------------------------------------------
-        If Button4.Enabled = False AndAlso Button5.Enabled = False AndAlso Button6.Enabled = False AndAlso
-        Button13.Enabled = False AndAlso Button14.Enabled = False AndAlso Button15.Enabled = False AndAlso
-        Button22.Enabled = False AndAlso Button23.Enabled = False AndAlso Button24.Enabled = False Then
+        If blockLine2 = 1 Then
+            Button4.Enabled = False
+            Button5.Enabled = False
+            Button6.Enabled = False
+            Button13.Enabled = False
+            Button14.Enabled = False
+            Button15.Enabled = False
+            Button22.Enabled = False
+            Button23.Enabled = False
+            Button24.Enabled = False
             checkBlock = 1
         Else
             checkBlock = 0
         End If
     End Sub
 
-    Private Sub third_Block(sender As Object, e As EventArgs) _
-    Handles Button7.Click, Button8.Click, Button9.Click, Button16.Click, Button17.Click, Button18.Click, Button25.Click, Button26.Click, Button27.Click
+    Private Sub third_Block(sender As Object, e As EventArgs) Handles Button7.Click, Button8.Click, Button9.Click, Button16.Click, Button17.Click, Button18.Click, Button25.Click, Button26.Click, Button27.Click
         SetAllButtonsToWhite()
         Dim ClickedButton = DirectCast(sender, Button)
-        If userStatus <> 3 AndAlso userStatus <> 0 Then
+        If userStatus <> 3 AndAlso userStatus <> 0 AndAlso userStatus <> 10 Then
             If checkBlock <> 1 Then
                 ClickedButton.BackColor = Color.Red
                 Exit Sub
@@ -505,21 +571,41 @@ Public Class Form1
             Case 27
                 userStatus = 9
         End Select
+        If (userStatus = 1 AndAlso blockLine1 = 1) OrElse
+        (userStatus = 2 AndAlso blockLine2 = 1) OrElse
+        (userStatus = 3 AndAlso blockLine3 = 1) OrElse
+        (userStatus = 4 AndAlso blockLine4 = 1) OrElse
+        (userStatus = 5 AndAlso blockLine5 = 1) OrElse
+        (userStatus = 6 AndAlso blockLine6 = 1) OrElse
+        (userStatus = 7 AndAlso blockLine7 = 1) OrElse
+        (userStatus = 8 AndAlso blockLine8 = 1) OrElse
+        (userStatus = 9 AndAlso blockLine9 = 1) Then
+            userStatus = 10
+        End If
         '------------------------------------------------------------
-        If Button7.Enabled = False AndAlso Button8.Enabled = False AndAlso Button9.Enabled = False AndAlso
-        Button16.Enabled = False AndAlso Button17.Enabled = False AndAlso Button18.Enabled = False AndAlso
-        Button25.Enabled = False AndAlso Button26.Enabled = False AndAlso Button27.Enabled = False Then
+        If blockLine3 = 1 Then
+            Button7.Enabled = False
+            Button8.Enabled = False
+            Button9.Enabled = False
+            Button16.Enabled = False
+            Button17.Enabled = False
+            Button18.Enabled = False
+            Button25.Enabled = False
+            Button26.Enabled = False
+            Button27.Enabled = False
             checkBlock = 1
         Else
             checkBlock = 0
         End If
     End Sub
 
-    Private Sub fourth_Block(sender As Object, e As EventArgs) _
-    Handles Button28.Click, Button29.Click, Button30.Click, Button37.Click, Button38.Click, Button39.Click, Button46.Click, Button47.Click, Button48.Click
+    Private Sub fourth_Block(sender As Object, e As EventArgs) Handles Button28.Click, Button29.Click, Button30.Click, Button37.Click, Button38.Click, Button39.Click, Button46.Click, Button47.Click, Button48.Click
         SetAllButtonsToWhite()
         Dim ClickedButton = DirectCast(sender, Button)
-        If userStatus <> 4 AndAlso userStatus <> 0 Then
+        If blockLine4 = 1 Then
+            Exit Sub
+        End If
+        If userStatus <> 4 AndAlso userStatus <> 0 AndAlso userStatus <> 10 Then
             If checkBlock <> 1 Then
                 ClickedButton.BackColor = Color.Red
                 Exit Sub
@@ -668,21 +754,41 @@ Public Class Form1
             Case 48
                 userStatus = 9
         End Select
+        If (userStatus = 1 AndAlso blockLine1 = 1) OrElse
+        (userStatus = 2 AndAlso blockLine2 = 1) OrElse
+        (userStatus = 3 AndAlso blockLine3 = 1) OrElse
+        (userStatus = 4 AndAlso blockLine4 = 1) OrElse
+        (userStatus = 5 AndAlso blockLine5 = 1) OrElse
+        (userStatus = 6 AndAlso blockLine6 = 1) OrElse
+        (userStatus = 7 AndAlso blockLine7 = 1) OrElse
+        (userStatus = 8 AndAlso blockLine8 = 1) OrElse
+        (userStatus = 9 AndAlso blockLine9 = 1) Then
+            userStatus = 10
+        End If
         '------------------------------------------------------------
-        If Button28.Enabled = False AndAlso Button29.Enabled = False AndAlso Button30.Enabled = False AndAlso
-        Button37.Enabled = False AndAlso Button38.Enabled = False AndAlso Button39.Enabled = False AndAlso
-        Button46.Enabled = False AndAlso Button47.Enabled = False AndAlso Button48.Enabled = False Then
+        If blockLine4 = 1 Then
+            Button28.Enabled = False
+            Button29.Enabled = False
+            Button30.Enabled = False
+            Button37.Enabled = False
+            Button38.Enabled = False
+            Button39.Enabled = False
+            Button46.Enabled = False
+            Button47.Enabled = False
+            Button48.Enabled = False
             checkBlock = 1
         Else
             checkBlock = 0
         End If
     End Sub
 
-    Private Sub fifth_Block(sender As Object, e As EventArgs) _
-    Handles Button31.Click, Button32.Click, Button33.Click, Button40.Click, Button41.Click, Button42.Click, Button49.Click, Button50.Click, Button51.Click
+    Private Sub fifth_Block(sender As Object, e As EventArgs) Handles Button31.Click, Button32.Click, Button33.Click, Button40.Click, Button41.Click, Button42.Click, Button49.Click, Button50.Click, Button51.Click
         SetAllButtonsToWhite()
         Dim ClickedButton = DirectCast(sender, Button)
-        If userStatus <> 5 AndAlso userStatus <> 0 Then
+        If blockLine5 = 1 Then
+            Exit Sub
+        End If
+        If userStatus <> 5 AndAlso userStatus <> 0 AndAlso userStatus <> 10 Then
             If checkBlock <> 1 Then
                 ClickedButton.BackColor = Color.Red
                 Exit Sub
@@ -831,21 +937,41 @@ Public Class Form1
             Case 51
                 userStatus = 9
         End Select
+        If (userStatus = 1 AndAlso blockLine1 = 1) OrElse
+        (userStatus = 2 AndAlso blockLine2 = 1) OrElse
+        (userStatus = 3 AndAlso blockLine3 = 1) OrElse
+        (userStatus = 4 AndAlso blockLine4 = 1) OrElse
+        (userStatus = 5 AndAlso blockLine5 = 1) OrElse
+        (userStatus = 6 AndAlso blockLine6 = 1) OrElse
+        (userStatus = 7 AndAlso blockLine7 = 1) OrElse
+        (userStatus = 8 AndAlso blockLine8 = 1) OrElse
+        (userStatus = 9 AndAlso blockLine9 = 1) Then
+            userStatus = 10
+        End If
         '------------------------------------------------------------
-        If Button31.Enabled = False AndAlso Button32.Enabled = False AndAlso Button33.Enabled = False AndAlso
-        Button40.Enabled = False AndAlso Button41.Enabled = False AndAlso Button42.Enabled = False AndAlso
-        Button49.Enabled = False AndAlso Button50.Enabled = False AndAlso Button51.Enabled = False Then
+        If blockLine5 = 1 Then
+            Button31.Enabled = False
+            Button32.Enabled = False
+            Button33.Enabled = False
+            Button40.Enabled = False
+            Button41.Enabled = False
+            Button42.Enabled = False
+            Button49.Enabled = False
+            Button50.Enabled = False
+            Button51.Enabled = False
             checkBlock = 1
         Else
             checkBlock = 0
         End If
     End Sub
 
-    Private Sub sixth_Block(sender As Object, e As EventArgs) _
-    Handles Button34.Click, Button35.Click, Button36.Click, Button43.Click, Button44.Click, Button45.Click, Button52.Click, Button53.Click, Button54.Click
+    Private Sub sixth_Block(sender As Object, e As EventArgs) Handles Button34.Click, Button35.Click, Button36.Click, Button43.Click, Button44.Click, Button45.Click, Button52.Click, Button53.Click, Button54.Click
         SetAllButtonsToWhite()
         Dim ClickedButton = DirectCast(sender, Button)
-        If userStatus <> 6 AndAlso userStatus <> 0 Then
+        If blockLine6 = 1 Then
+            Exit Sub
+        End If
+        If userStatus <> 6 AndAlso userStatus <> 0 AndAlso userStatus <> 10 Then
             If checkBlock <> 1 Then
                 ClickedButton.BackColor = Color.Red
                 Exit Sub
@@ -994,21 +1120,41 @@ Public Class Form1
             Case 54
                 userStatus = 9
         End Select
+        If (userStatus = 1 AndAlso blockLine1 = 1) OrElse
+        (userStatus = 2 AndAlso blockLine2 = 1) OrElse
+        (userStatus = 3 AndAlso blockLine3 = 1) OrElse
+        (userStatus = 4 AndAlso blockLine4 = 1) OrElse
+        (userStatus = 5 AndAlso blockLine5 = 1) OrElse
+        (userStatus = 6 AndAlso blockLine6 = 1) OrElse
+        (userStatus = 7 AndAlso blockLine7 = 1) OrElse
+        (userStatus = 8 AndAlso blockLine8 = 1) OrElse
+        (userStatus = 9 AndAlso blockLine9 = 1) Then
+            userStatus = 10
+        End If
         '------------------------------------------------------------
-        If Button34.Enabled = False AndAlso Button35.Enabled = False AndAlso Button36.Enabled = False AndAlso
-        Button43.Enabled = False AndAlso Button44.Enabled = False AndAlso Button45.Enabled = False AndAlso
-        Button52.Enabled = False AndAlso Button53.Enabled = False AndAlso Button54.Enabled = False Then
+        If blockLine6 = 1 Then
+            Button34.Enabled = False
+            Button35.Enabled = False
+            Button36.Enabled = False
+            Button43.Enabled = False
+            Button44.Enabled = False
+            Button45.Enabled = False
+            Button52.Enabled = False
+            Button53.Enabled = False
+            Button54.Enabled = False
             checkBlock = 1
         Else
             checkBlock = 0
         End If
     End Sub
 
-    Private Sub seventh_Block(sender As Object, e As EventArgs) _
-    Handles Button55.Click, Button56.Click, Button57.Click, Button64.Click, Button65.Click, Button66.Click, Button73.Click, Button74.Click, Button75.Click
+    Private Sub seventh_Block(sender As Object, e As EventArgs) Handles Button55.Click, Button56.Click, Button57.Click, Button64.Click, Button65.Click, Button66.Click, Button73.Click, Button74.Click, Button75.Click
         SetAllButtonsToWhite()
         Dim ClickedButton = DirectCast(sender, Button)
-        If userStatus <> 7 AndAlso userStatus <> 0 Then
+        If blockLine7 = 1 Then
+            Exit Sub
+        End If
+        If userStatus <> 7 AndAlso userStatus <> 0 AndAlso userStatus <> 10 Then
             If checkBlock <> 1 Then
                 ClickedButton.BackColor = Color.Red
                 Exit Sub
@@ -1157,21 +1303,41 @@ Public Class Form1
             Case 75
                 userStatus = 9
         End Select
+        If (userStatus = 1 AndAlso blockLine1 = 1) OrElse
+        (userStatus = 2 AndAlso blockLine2 = 1) OrElse
+        (userStatus = 3 AndAlso blockLine3 = 1) OrElse
+        (userStatus = 4 AndAlso blockLine4 = 1) OrElse
+        (userStatus = 5 AndAlso blockLine5 = 1) OrElse
+        (userStatus = 6 AndAlso blockLine6 = 1) OrElse
+        (userStatus = 7 AndAlso blockLine7 = 1) OrElse
+        (userStatus = 8 AndAlso blockLine8 = 1) OrElse
+        (userStatus = 9 AndAlso blockLine9 = 1) Then
+            userStatus = 10
+        End If
         '------------------------------------------------------------
-        If Button55.Enabled = False AndAlso Button56.Enabled = False AndAlso Button57.Enabled = False AndAlso
-        Button64.Enabled = False AndAlso Button65.Enabled = False AndAlso Button66.Enabled = False AndAlso
-        Button73.Enabled = False AndAlso Button74.Enabled = False AndAlso Button75.Enabled = False Then
+        If blockLine7 = 1 Then
+            Button55.Enabled = False
+            Button56.Enabled = False
+            Button57.Enabled = False
+            Button64.Enabled = False
+            Button65.Enabled = False
+            Button66.Enabled = False
+            Button73.Enabled = False
+            Button74.Enabled = False
+            Button75.Enabled = False
             checkBlock = 1
         Else
             checkBlock = 0
         End If
     End Sub
 
-    Private Sub eighth_Block(sender As Object, e As EventArgs) _
-    Handles Button58.Click, Button59.Click, Button60.Click, Button67.Click, Button68.Click, Button69.Click, Button76.Click, Button77.Click, Button78.Click
+    Private Sub eighth_Block(sender As Object, e As EventArgs) Handles Button58.Click, Button59.Click, Button60.Click, Button67.Click, Button68.Click, Button69.Click, Button76.Click, Button77.Click, Button78.Click
         SetAllButtonsToWhite()
         Dim ClickedButton = DirectCast(sender, Button)
-        If userStatus <> 8 AndAlso userStatus <> 0 Then
+        If blockLine8 = 1 Then
+            Exit Sub
+        End If
+        If userStatus <> 8 AndAlso userStatus <> 0 AndAlso userStatus <> 10 Then
             If checkBlock <> 1 Then
                 ClickedButton.BackColor = Color.Red
                 Exit Sub
@@ -1320,21 +1486,41 @@ Public Class Form1
             Case 78
                 userStatus = 9
         End Select
+        If (userStatus = 1 AndAlso blockLine1 = 1) OrElse
+        (userStatus = 2 AndAlso blockLine2 = 1) OrElse
+        (userStatus = 3 AndAlso blockLine3 = 1) OrElse
+        (userStatus = 4 AndAlso blockLine4 = 1) OrElse
+        (userStatus = 5 AndAlso blockLine5 = 1) OrElse
+        (userStatus = 6 AndAlso blockLine6 = 1) OrElse
+        (userStatus = 7 AndAlso blockLine7 = 1) OrElse
+        (userStatus = 8 AndAlso blockLine8 = 1) OrElse
+        (userStatus = 9 AndAlso blockLine9 = 1) Then
+            userStatus = 10
+        End If
         '------------------------------------------------------------
-        If Button58.Enabled = False AndAlso Button59.Enabled = False AndAlso Button60.Enabled = False AndAlso
-        Button67.Enabled = False AndAlso Button68.Enabled = False AndAlso Button69.Enabled = False AndAlso
-        Button76.Enabled = False AndAlso Button77.Enabled = False AndAlso Button78.Enabled = False Then
+        If blockLine8 Then
+            Button58.Enabled = False
+            Button59.Enabled = False
+            Button60.Enabled = False
+            Button67.Enabled = False
+            Button68.Enabled = False
+            Button69.Enabled = False
+            Button76.Enabled = False
+            Button77.Enabled = False
+            Button78.Enabled = False
             checkBlock = 1
         Else
             checkBlock = 0
         End If
     End Sub
 
-    Private Sub nineth_Block(sender As Object, e As EventArgs) _
-    Handles Button61.Click, Button62.Click, Button63.Click, Button70.Click, Button71.Click, Button72.Click, Button79.Click, Button80.Click, Button81.Click
+    Private Sub nineth_Block(sender As Object, e As EventArgs) Handles Button61.Click, Button62.Click, Button63.Click, Button70.Click, Button71.Click, Button72.Click, Button79.Click, Button80.Click, Button81.Click
         SetAllButtonsToWhite()
         Dim ClickedButton = DirectCast(sender, Button)
-        If userStatus <> 9 AndAlso userStatus <> 0 Then
+        If blockLine9 = 1 Then
+            Exit Sub
+        End If
+        If userStatus <> 9 AndAlso userStatus <> 0 AndAlso userStatus <> 10 Then
             If checkBlock <> 1 Then
                 ClickedButton.BackColor = Color.Red
                 Exit Sub
@@ -1483,14 +1669,65 @@ Public Class Form1
             Case 81
                 userStatus = 9
         End Select
+        If (userStatus = 1 AndAlso blockLine1 = 1) OrElse
+        (userStatus = 2 AndAlso blockLine2 = 1) OrElse
+        (userStatus = 3 AndAlso blockLine3 = 1) OrElse
+        (userStatus = 4 AndAlso blockLine4 = 1) OrElse
+        (userStatus = 5 AndAlso blockLine5 = 1) OrElse
+        (userStatus = 6 AndAlso blockLine6 = 1) OrElse
+        (userStatus = 7 AndAlso blockLine7 = 1) OrElse
+        (userStatus = 8 AndAlso blockLine8 = 1) OrElse
+        (userStatus = 9 AndAlso blockLine9 = 1) Then
+            userStatus = 10
+        End If
         '------------------------------------------------------------
-        If Button61.Enabled = False AndAlso Button62.Enabled = False AndAlso Button63.Enabled = False AndAlso
-        Button70.Enabled = False AndAlso Button71.Enabled = False AndAlso Button72.Enabled = False AndAlso
-        Button79.Enabled = False AndAlso Button80.Enabled = False AndAlso Button81.Enabled = False Then
+        If blockLine9 Then
+            Button61.Enabled = False
+            Button62.Enabled = False
+            Button63.Enabled = False
+            Button70.Enabled = False
+            Button71.Enabled = False
+            Button72.Enabled = False
+            Button79.Enabled = False
+            Button80.Enabled = False
+            Button81.Enabled = False
             checkBlock = 1
         Else
             checkBlock = 0
         End If
     End Sub
 
+    Private Sub All_Block(sender As Object, e As EventArgs) _
+        Handles Button1.Click, Button2.Click, Button3.Click, Button10.Click, Button11.Click, Button12.Click, Button19.Click, Button20.Click, Button21.Click,
+        Button4.Click, Button5.Click, Button6.Click, Button13.Click, Button14.Click, Button15.Click, Button22.Click, Button23.Click, Button24.Click,
+        Button7.Click, Button8.Click, Button9.Click, Button16.Click, Button17.Click, Button18.Click, Button25.Click, Button26.Click, Button27.Click,
+        Button28.Click, Button29.Click, Button30.Click, Button37.Click, Button38.Click, Button39.Click, Button46.Click, Button47.Click, Button48.Click,
+        Button31.Click, Button32.Click, Button33.Click, Button40.Click, Button41.Click, Button42.Click, Button49.Click, Button50.Click, Button51.Click,
+        Button34.Click, Button35.Click, Button36.Click, Button43.Click, Button44.Click, Button45.Click, Button52.Click, Button53.Click, Button54.Click,
+        Button55.Click, Button56.Click, Button57.Click, Button64.Click, Button65.Click, Button66.Click, Button73.Click, Button74.Click, Button75.Click,
+        Button58.Click, Button59.Click, Button60.Click, Button67.Click, Button68.Click, Button69.Click, Button76.Click, Button77.Click, Button78.Click,
+        Button61.Click, Button62.Click, Button63.Click, Button70.Click, Button71.Click, Button72.Click, Button79.Click, Button80.Click, Button81.Click
+
+        If CountBlue() = 15 Then
+            Dim secondForm = New Dialog1()
+            secondForm.ShowDialog()
+        ElseIf CountYellow() = 15 Then
+            Dim secondForm = New Dialog2()
+            secondForm.ShowDialog()
+        End If
+
+        If AllButtonClose() Then
+            If CountBlue() > CountYellow() Then
+                Dim secondForm = New Dialog1()
+                secondForm.ShowDialog()
+            ElseIf CountBlue() < CountYellow() Then
+                Dim secondForm = New Dialog2()
+                secondForm.ShowDialog()
+            Else
+                Dim secondForm = New Dialog3()
+                secondForm.ShowDialog()
+            End If
+        End If
+
+    End Sub
 End Class
